@@ -129,8 +129,8 @@ public class SpellCheckTest {
      * Cleans the given textfile. Removes em-dashes, possessive apostrophes, and leading and
      * trailing apostrophes. Splits characters by spaces or punctuation. Removes numeric words.
      * Sets everything to lowercase.
-     * @param br
-     * @param w
+//     * @param br
+//     * @param w
      */
     public static void cleanText(String text) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("test_files/" + text + ".txt"));

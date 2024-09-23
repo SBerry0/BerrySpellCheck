@@ -1,9 +1,9 @@
 Name: YOUR NAME HERE
 
-| Date    |  Time  |                                     Update |
-|:--------|:------:|-------------------------------------------:|
-| April 5 | 9-10pm | I tried to write abstract, efficient code. |
-|         |        |                                            |
+| Date   |    Time     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Update |
+|:-------|:-----------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Sep 23 | 1:00-1:45pm | I started by thinking about my answer to the quiz question that we had that was similar to this, and how I could use a tree-like structure to keep track of each character then go through that to search the dictionary. At first I approached the tree first, then the dictionary, but that was really dumb because I would still have to check if the word existed. So then, I pivoted to building up the tree as I iterated through the dictionary. Now I have to test to see if the tree actually results in what I want. |
+|        |             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.
