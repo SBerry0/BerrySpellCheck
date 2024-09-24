@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -21,15 +22,36 @@ public class SpellCheck {
      */
     public String[] checkWords(String[] text, String[] dictionary) {
         LetterNode[] characterTree = makeTree(dictionary);
-        System.out.println(Arrays.toString(characterTree));
+        ArrayList<String> mispelled = new ArrayList<>();
+        for (String word : text) {
+            LetterNode currentNode = characterTree[0];
+            for (int i = 0; i < word.length(); i++) {
+                char c = word.charAt(i);
+                System.out.println("Checking: " + currentNode.getChildren().size());
 
-        return null;
+                int childPosition = findChild(currentNode, c);
+                if (childPosition != -1) {
+                    // Word is so far in the dictionary
+                    currentNode = currentNode.children.get(childPosition);
+                    continue;
+                }
+                else {
+                    // Word is not in the dictionary
+                    mispelled.add(word);
+                    break;
+                }
+            }
+        }
+        String[] out = new String[mispelled.size()];
+        for (int i = 0; i < mispelled.size(); i++) {
+            out[i] = mispelled.get(i);
+        }
+
+        return out;
     }
 
     public int findChild(LetterNode node, char letter) {
-//        for (LetterNode c : node.getChildren()) {
         for (int i = 0; i < node.getChildren().size(); i++) {
-
             if (node.getChildren().get(i).getLetter() == letter) {
                 return i;
             }
@@ -40,41 +62,30 @@ public class SpellCheck {
     public LetterNode[] makeTree(String[] dictionary) {
         LetterNode[] tree = new LetterNode[1];
         tree[0] = new LetterNode('_');
-        LetterNode currentNode = tree[0];
-//        for (int i = 0; i < tree.length; i++) {
-//            tree[i] = new LetterNode((char) (i+'a'));
-////            tree[i].addChild((char) (i+97));
-//        }
+
         for (String word : dictionary) {
-            System.out.println(word);
+            LetterNode currentNode = tree[0];
+//            System.out.println(word);
             for (int i = 0; i < word.length(); i++) {
                 char c  = word.charAt(i);
+                System.out.println("Making: " + currentNode.getChildren().size());
                 int childIndex = findChild(currentNode, c);
+                System.out.println(childIndex);
                 LetterNode child;
                 if (childIndex != -1) {
-                    // If that letter exists on the chain... move to the node
+                    // If the next letter exists on the chain...move to the node
+//                    System.out.println(c + " exists");
                     child = currentNode.children.get(childIndex);
                 }
                 else {
+//                    System.out.println(c + " being added");
                     // If that letter does not exist on the chain... make the node
                     child = new LetterNode(c);
+                    currentNode.addChild(child);
                 }
-                currentNode.addChild(child);
                 currentNode = child;
             }
         }
-        System.out.println("TEST");
-
-//        for (LetterNode n : tree[0].children) {
-//
-//        }
-
         return tree;
-    }
-
-
-
-    public int binarySearch(String word, String[] dictionary) {
-        return 0;
     }
 }
