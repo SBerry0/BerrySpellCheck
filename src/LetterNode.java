@@ -21,6 +21,10 @@ public class LetterNode {
         return children;
     }
 
+    public String toString() {
+        return ""+letter;
+    }
+
 //    public String toString() {
 //        String out = "Letter: ";
 //        out += letter + "\n";

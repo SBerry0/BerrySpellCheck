@@ -51,12 +51,30 @@ public class SpellCheck {
     }
 
     public int findChild(LetterNode node, char letter) {
-        for (int i = 0; i < node.getChildren().size(); i++) {
-            if (node.getChildren().get(i).getLetter() == letter) {
-                return i;
+        // Binary Search
+        int start = 0;
+        int end = node.getChildren().size();
+        System.out.println(node.getChildren());
+        System.out.println("looking for " + letter);
+        while (start < end) {
+            int mid = (start + end) / 2;
+            if (node.getChildren().get(mid).getLetter() == letter) {
+                return mid;
+            }
+            if (node.getChildren().get(mid).getLetter() < letter) {
+                end = mid;
+            }
+            else {
+                start = mid+1;
             }
         }
         return -1;
+//        for (int i = 0; i < node.getChildren().size(); i++) {
+//            if (node.getChildren().get(i).getLetter() == letter) {
+//                return i;
+//            }
+//        }
+//        return -1;
     }
 
     public LetterNode[] makeTree(String[] dictionary) {
