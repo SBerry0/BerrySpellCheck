@@ -1,23 +1,34 @@
 import java.util.ArrayList;
 
 public class LetterNode {
+    int NUM_CHARACTERS = 256;
     char letter;
-    ArrayList<LetterNode> children;
+    LetterNode[] children;
+    boolean isWordEnd;
 
-    public LetterNode(char c) {
+    public LetterNode(char c, boolean isWordEnd) {
         letter = c;
-        children = new ArrayList<>();
+        children = new LetterNode[NUM_CHARACTERS];
+        this.isWordEnd = isWordEnd;
     }
 
     public void addChild(LetterNode c) {
-        children.add(c);
+        children[c.getLetter()] = c;
+    }
+
+    public boolean isWordEnd() {
+        return isWordEnd;
+    }
+
+    public void setWordEnd(boolean wordEnd) {
+        isWordEnd = wordEnd;
     }
 
     public char getLetter() {
         return letter;
     }
 
-    public ArrayList<LetterNode> getChildren() {
+    public LetterNode[] getChildren() {
         return children;
     }
 
