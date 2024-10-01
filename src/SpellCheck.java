@@ -20,6 +20,20 @@ public class SpellCheck {
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
     public String[] checkWords(String[] text, String[] dictionary) {
+        Trie dictionaryTrie = new Trie();
+        for (String word : dictionary) {
+            dictionaryTrie.insert(word);
+        }
+        Trie mispelledTrie = new Trie();
+        for (String word : text) {
+            if (dictionaryTrie.lookup(word)) {
+
+            } else {
+
+            }
+        }
+
+
         LetterNode[] characterTree = makeTree(dictionary);
         LetterNode[] mispelledTree = new LetterNode[1];
         ArrayList<String> mispelled = findMispelled(text, characterTree, mispelledTree);
