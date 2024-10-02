@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 public class Trie {
@@ -5,6 +7,7 @@ public class Trie {
 
     public Trie() {
         trie = new LetterNode[1];
+        trie[0] = new LetterNode('_', false);
     }
 
     public void insert(String word) {
@@ -20,7 +23,11 @@ public class Trie {
             } else {
                 // If the next letter exists on the chain...move to the node
                 child = currentNode.children[c];
-                child.setWordEnd(i == word.length() - 1);
+                if (i == word.length() - 1) {
+                    child.setWordEnd(true);
+                    System.out.println("setting end word");
+                }
+//                child.setWordEnd(i == word.length() - 1);
             }
             currentNode = child;
         }
@@ -50,17 +57,45 @@ public class Trie {
         return false;
     }
 
-//    public void printTrie() {
-//        Stack<LetterNode> possibilities = new Stack<>();
-//        possibilities.add(trie[0]);
-//
-//        while (!possibilities.isEmpty()) {
-//            LetterNode node = possibilities.pop();
-//            for (LetterNode child : node.getChildren()) {
-//                possibilities.add(child);
-//            }
-//        }
-//
-//    }
+    public void printTrie(LetterNode node, String letters) {
+        if (node.isWordEnd()) {
+            System.out.println(letters);
+        }
+
+
+    }
+
+    public String[] printTrie() {
+        Stack<LetterNode> possibilities = new Stack<>();
+        possibilities.add(trie[0]);
+        String word = "";
+        ArrayList<String> words = new ArrayList<>();
+
+        while (!possibilities.isEmpty()) {
+            LetterNode node = possibilities.pop();
+            if (node != null) {
+                if (node.getLetter() != '_') {
+                    word += node.getLetter();
+                }
+                if (node.isWordEnd()) {
+                    words.add(word);
+                    System.out.println(word);
+                    word = "";
+                }
+//                System.out.println(Arrays.toString(node.getChildren()));
+                for (LetterNode child : node.getChildren()) {
+                    if (child != null) {
+                        possibilities.add(child);
+                    }
+                }
+            }
+        }
+        String[] out = new String[words.size()];
+        for (int i = 0; i < words.size(); i++) {
+            out[i] = words.get(i);
+        }
+
+        return out;
+    }
 
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Spell Check
@@ -24,20 +25,25 @@ public class SpellCheck {
         for (String word : dictionary) {
             dictionaryTrie.insert(word);
         }
-        Trie mispelledTrie = new Trie();
-        for (String word : text) {
-            if (dictionaryTrie.lookup(word)) {
+        System.out.println(Arrays.toString(dictionaryTrie.printTrie()));
 
+        Trie mispelledTrie = new Trie();
+        ArrayList<String> mispelled = new ArrayList<>();
+        for (String word : text) {
+            if (!mispelledTrie.lookup(word) && !dictionaryTrie.lookup(word)) {
+                // If the word does not exist in the dictionary add it to mispelled
+                mispelledTrie.insert(word);
+                mispelled.add(word);
             } else {
 
             }
         }
+//        String[] out = mispelledTrie
 
 
-        LetterNode[] characterTree = makeTree(dictionary);
-        LetterNode[] mispelledTree = new LetterNode[1];
-        ArrayList<String> mispelled = findMispelled(text, characterTree, mispelledTree);
-
+//        LetterNode[] characterTree = makeTree(dictionary);
+//        LetterNode[] mispelledTree = new LetterNode[1];
+//
         String[] out = new String[mispelled.size()];
         for (int i = 0; i < mispelled.size(); i++) {
             out[i] = mispelled.get(i);
