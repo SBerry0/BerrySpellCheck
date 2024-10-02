@@ -25,7 +25,6 @@ public class Trie {
                 child = currentNode.children[c];
                 if (i == word.length() - 1) {
                     child.setWordEnd(true);
-                    System.out.println("setting end word");
                 }
 //                child.setWordEnd(i == word.length() - 1);
             }
@@ -38,7 +37,7 @@ public class Trie {
         LetterNode currentNode = trie[0];
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
-            System.out.println("Checking:");
+//            System.out.println("Checking:");
 
             if (currentNode.getChildren()[c] != null) {
                 // Word is so far in the dictionary
@@ -48,13 +47,16 @@ public class Trie {
                         // If the end of the word isn't the end of any words in the dictionary
                         return false;
                     }
+                    else {
+                        return true;
+                    }
                 }
             } else {
                 // Word is not in the dictionary
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public void printTrie(LetterNode node, String letters) {
@@ -70,14 +72,18 @@ public class Trie {
         possibilities.add(trie[0]);
         String word = "";
         ArrayList<String> words = new ArrayList<>();
-
+        String rootWord = "";
         while (!possibilities.isEmpty()) {
             LetterNode node = possibilities.pop();
             if (node != null) {
                 if (node.getLetter() != '_') {
                     word += node.getLetter();
+//                    rootWord += node.getLetter();
                 }
                 if (node.isWordEnd()) {
+                    rootWord = word.substring(1, word.length()-1);
+                    // I wanna set the word to the last word end minus the last letter right. but somehow also reset it to nothing when going to a new root
+
                     words.add(word);
                     System.out.println(word);
                     word = "";

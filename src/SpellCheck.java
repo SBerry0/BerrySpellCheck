@@ -25,19 +25,22 @@ public class SpellCheck {
         for (String word : dictionary) {
             dictionaryTrie.insert(word);
         }
-        System.out.println(Arrays.toString(dictionaryTrie.printTrie()));
+//        System.out.println(Arrays.toString(dictionaryTrie.printTrie()));
 
         Trie mispelledTrie = new Trie();
         ArrayList<String> mispelled = new ArrayList<>();
+        int c = 0;
         for (String word : text) {
+//            System.out.println(word);
             if (!mispelledTrie.lookup(word) && !dictionaryTrie.lookup(word)) {
+//                System.out.println("mispelled word");
                 // If the word does not exist in the dictionary add it to mispelled
+                c++;
                 mispelledTrie.insert(word);
                 mispelled.add(word);
-            } else {
-
             }
         }
+//        System.out.println(c);
 //        String[] out = mispelledTrie
 
 
@@ -48,7 +51,7 @@ public class SpellCheck {
         for (int i = 0; i < mispelled.size(); i++) {
             out[i] = mispelled.get(i);
         }
-
+//        System.out.println(mispelled);
         return out;
     }
 
