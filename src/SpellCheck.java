@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Spell Check
@@ -25,93 +24,32 @@ public class SpellCheck {
         for (String word : dictionary) {
             dictionaryTrie.insert(word);
         }
-//        System.out.println(Arrays.toString(dictionaryTrie.printTrie()));
 
         Trie mispelledTrie = new Trie();
         ArrayList<String> mispelled = new ArrayList<>();
-        int c = 0;
         for (String word : text) {
-//            System.out.println(word);
             if (!mispelledTrie.lookup(word) && !dictionaryTrie.lookup(word)) {
-//                System.out.println("mispelled word");
                 // If the word does not exist in the dictionary add it to mispelled
-                c++;
                 mispelledTrie.insert(word);
                 mispelled.add(word);
             }
         }
-//        System.out.println(c);
-//        String[] out = mispelledTrie
 
 
-//        LetterNode[] characterTree = makeTree(dictionary);
-//        LetterNode[] mispelledTree = new LetterNode[1];
-//
+
+
+
+
+
+
+
+
+
+
         String[] out = new String[mispelled.size()];
         for (int i = 0; i < mispelled.size(); i++) {
             out[i] = mispelled.get(i);
         }
-//        System.out.println(mispelled);
         return out;
-    }
-
-    private ArrayList<String> findMispelled(String[] text, LetterNode[] characterTree, LetterNode[] mispelledTree) {
-        ArrayList<String> mispelled = new ArrayList<>();
-        for (String word : text) {
-            LetterNode currentNode = characterTree[0];
-            for (int i = 0; i < word.length(); i++) {
-                char c = word.charAt(i);
-                System.out.println("Checking:");
-
-                if (currentNode.getChildren()[c] != null) {
-                    // Word is so far in the dictionary
-                    currentNode = currentNode.children[currentNode.getChildren()[c].getLetter()];
-                    if (i == word.length() - 1) {
-                        if (!currentNode.isWordEnd()) {
-                            // If the end of the word isn't the end of any words in the dictionary
-                            mispelled.add(word);
-                            // No need for a break
-                        }
-                    }
-                } else {
-                    // Word is not in the dictionary
-                    mispelled.add(word);
-                    break;
-                }
-            }
-        }
-        return mispelled;
-    }
-
-    public LetterNode[] makeTree(String[] dictionary) {
-        LetterNode[] tree = new LetterNode[1];
-        tree[0] = new LetterNode('_', false);
-
-        for (String word : dictionary) {
-            LetterNode currentNode = tree[0];
-//            System.out.println(word);
-            for (int i = 0; i < word.length(); i++) {
-                char c = word.charAt(i);
-                System.out.println(c);
-
-                currentNode = put(word, currentNode, c, i);
-            }
-        }
-        return tree;
-    }
-
-    private LetterNode put(String word, LetterNode currentNode, char c, int i) {
-        LetterNode child;
-        if (currentNode.getChildren()[c] == null) {
-            // If that letter does not exist on the chain... make the node
-            child = new LetterNode(c, (i == word.length() - 1));
-            currentNode.addChild(child);
-        } else {
-            // If the next letter exists on the chain...move to the node
-//                    System.out.println(c + " exists");
-            child = currentNode.children[c];
-            child.setWordEnd(i == word.length() - 1);
-        }
-        return child;
     }
 }
