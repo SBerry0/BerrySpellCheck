@@ -38,6 +38,19 @@ public class TSTNode {
         return isEnding;
     }
 
+    public void setLess(TSTNode n) {
+        children[LESS] = n;
+    }
+    public void setEqual(TSTNode n) {
+        children[EQUAL] = n;
+    }
+    public void setGreater(TSTNode n) {
+        children[GREATER] = n;
+    }
+
+
+
+
     public TSTNode setChild(char compChar, char nextChar) {
         if (letter == compChar) {
             return setChildNode(EQUAL, nextChar);

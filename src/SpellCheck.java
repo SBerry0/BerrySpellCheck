@@ -37,7 +37,7 @@ public class SpellCheck {
 
         TST dictionaryTST = new TST();
         for (String word : dictionary) {
-            dictionaryTST.insert(word);
+            dictionaryTST.insert(dictionaryTST.getRoot(), word);
         }
 
 

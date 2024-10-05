@@ -5,6 +5,10 @@ public class TST {
 //        root = new TSTNode('_');
     }
 
+    public TSTNode getRoot() {
+        return root;
+    }
+
     public TSTNode insertChar(TSTNode node, char c) {
         if (node == null) {
             node = new TSTNode(c);
@@ -12,6 +16,9 @@ public class TST {
         return node;
     }
 
+    public void insert(TSTNode node, String word) {
+        root = insert(node, word, 0);
+    }
 
     public TSTNode insert(TSTNode node, String word, int d) {
         char c = word.charAt(d);
@@ -19,42 +26,46 @@ public class TST {
             node = new TSTNode(c);
         }
         if (c < node.getLetter()) {
-            insert(node.getLess(), word, d);
+            node.setLess(insert(node.getLess(), word, d));
         }
         else if (c > node.getLetter()) {
-            insert(node.getGreater(), word, d);
+            node.setGreater(insert(node.getGreater(), word, d));
         }
         else if (c == node.getLetter()) {
-
-            insert(node.getGreater(), word, d);
+            if (d < word.length()-1) {
+                node.setEqual(insert(node.getEqual(), word, d+1));
+            } else {
+                // On the last letter... no need to make another child, but do have to set wordEnd
+                node.setEnding(true);
+            }
         }
         return node;
     }
 
 
-    public void insert(String word) {
-        TSTNode currentNode = root;
 
-
-        for (int i = 0; i < word.length()-1; i++) {
-            char c = word.charAt(i);
-            if (root == null && currentNode == null) {
-                root = new TSTNode(c);
-                currentNode = root;
-//                i--;
-            }
-
-            currentNode = currentNode.setChild(c, word.charAt(i+1));
+//    public void insert(String word) {
+//        TSTNode currentNode = root;
 //
-//            else if (currentNode.getLetter() == c) {
-//                currentNode = insertChar(currentNode.getEqual(), c);
-//            } else if (currentNode.getLetter() > c) {
-//                currentNode = insertChar(currentNode.getLess(), c);
-//            } else if (currentNode.getLetter() < c) {
-//                currentNode.setGreater(c);
-////                currentNode = insertChar(currentNode.getGreater(), c);
+//
+//        for (int i = 0; i < word.length()-1; i++) {
+//            char c = word.charAt(i);
+//            if (root == null && currentNode == null) {
+//                root = new TSTNode(c);
+//                currentNode = root;
+////                i--;
 //            }
-        }
+//
+//            currentNode = currentNode.setChild(c, word.charAt(i+1));
+////
+////            else if (currentNode.getLetter() == c) {
+////                currentNode = insertChar(currentNode.getEqual(), c);
+////            } else if (currentNode.getLetter() > c) {
+////                currentNode = insertChar(currentNode.getLess(), c);
+////            } else if (currentNode.getLetter() < c) {
+////                currentNode.setGreater(c);
+//////                currentNode = insertChar(currentNode.getGreater(), c);
+////            }
 
 
 
@@ -92,6 +103,6 @@ public class TST {
 //            }
 ////            currentNode = child;
 //        }
-    }
+//    }
 
 }
