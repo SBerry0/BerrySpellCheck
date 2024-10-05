@@ -13,19 +13,39 @@ public class TST {
     }
 
 
+    public TSTNode insert(TSTNode node, String word, int d) {
+        char c = word.charAt(d);
+        if (node == null) {
+            node = new TSTNode(c);
+        }
+        if (c < node.getLetter()) {
+            insert(node.getLess(), word, d);
+        }
+        else if (c > node.getLetter()) {
+            insert(node.getGreater(), word, d);
+        }
+        else if (c == node.getLetter()) {
+
+            insert(node.getGreater(), word, d);
+        }
+        return node;
+    }
+
 
     public void insert(String word) {
         TSTNode currentNode = root;
 
-        for (int i = 0; i < word.length(); i++) {
+
+        for (int i = 0; i < word.length()-1; i++) {
             char c = word.charAt(i);
             if (root == null && currentNode == null) {
                 root = new TSTNode(c);
                 currentNode = root;
+//                i--;
             }
-            else {
-                currentNode = currentNode.setChild(c);
-            }
+
+            currentNode = currentNode.setChild(c, word.charAt(i+1));
+//
 //            else if (currentNode.getLetter() == c) {
 //                currentNode = insertChar(currentNode.getEqual(), c);
 //            } else if (currentNode.getLetter() > c) {

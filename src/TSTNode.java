@@ -38,6 +38,16 @@ public class TSTNode {
         return isEnding;
     }
 
+    public TSTNode setChild(char compChar, char nextChar) {
+        if (letter == compChar) {
+            return setChildNode(EQUAL, nextChar);
+        }
+        if (letter > compChar) {
+            return setChildNode(LESS, nextChar);
+        }
+        return setChildNode(GREATER, nextChar);
+    }
+
     public TSTNode setChild(char c) {
         if (letter == c) {
             return setChildNode(EQUAL, c);
