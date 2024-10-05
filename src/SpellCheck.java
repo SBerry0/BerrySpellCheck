@@ -20,22 +20,25 @@ public class SpellCheck {
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
     public String[] checkWords(String[] text, String[] dictionary) {
-        Trie dictionaryTrie = new Trie();
-        for (String word : dictionary) {
-            dictionaryTrie.insert(word);
-        }
-
-        Trie mispelledTrie = new Trie();
+//        Trie dictionaryTrie = new Trie();
+//        for (String word : dictionary) {
+//            dictionaryTrie.insert(word);
+//        }
+//
+//        Trie mispelledTrie = new Trie();
         ArrayList<String> mispelled = new ArrayList<>();
-        for (String word : text) {
-            if (!mispelledTrie.lookup(word) && !dictionaryTrie.lookup(word)) {
-                // If the word does not exist in the dictionary add it to mispelled
-                mispelledTrie.insert(word);
-                mispelled.add(word);
-            }
+//        for (String word : text) {
+//            if (!mispelledTrie.lookup(word) && !dictionaryTrie.lookup(word)) {
+//                // If the word does not exist in the dictionary add it to mispelled
+//                mispelledTrie.insert(word);
+//                mispelled.add(word);
+//            }
+//        }
+
+        TST dictionaryTST = new TST();
+        for (String word : dictionary) {
+            dictionaryTST.insert(word);
         }
-
-
 
 
 

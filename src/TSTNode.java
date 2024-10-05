@@ -1,25 +1,33 @@
 public class TSTNode {
-    private TSTNode equal;
-    private TSTNode greater;
-    private TSTNode less;
+    public final int LESS = 0;
+    public final int EQUAL = 1;
+    public final int GREATER = 2;
+
+
+//    private TSTNode equal;
+//    private TSTNode greater;
+//    private TSTNode less;
     private char letter;
+    private TSTNode[] children;
     private boolean isEnding;
 
     TSTNode(char letter) {
         isEnding = false;
         this.letter = letter;
+        // 0=less; 1=equal; 2=greater
+        this.children = new TSTNode[3];
     }
 
     public TSTNode getEqual() {
-        return equal;
+        return children[EQUAL];
     }
 
     public TSTNode getGreater() {
-        return greater;
+        return children[GREATER];
     }
 
     public TSTNode getLess() {
-        return less;
+        return children[LESS];
     }
 
     public char getLetter() {
@@ -30,17 +38,35 @@ public class TSTNode {
         return isEnding;
     }
 
-    public void setEqual(TSTNode equal) {
-        this.equal = equal;
+    public TSTNode setChild(char c) {
+        if (letter == c) {
+            return setChildNode(EQUAL, c);
+        }
+        if (letter > c) {
+            return setChildNode(LESS, c);
+        }
+        return setChildNode(GREATER, c);
     }
 
-    public void setGreater(TSTNode greater) {
-        this.greater = greater;
+    public TSTNode setChildNode(int index, char c) {
+        if (children[index] == null) {
+            children[index] = new TSTNode(c);
+        }
+        else {
+            children[index].setChild(c);
+        }
+        return children[index];
     }
 
-    public void setLess(TSTNode less) {
-        this.less = less;
-    }
+
+//    public void setGreater(char c) {
+//        if (this.greater == null) {
+//            this.greater = new TSTNode(c);
+//        } else {
+//            this.greater.se
+//        }
+//        this.greater = greater;
+//    }
 
     public void setLetter(char letter) {
         this.letter = letter;
