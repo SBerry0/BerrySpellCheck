@@ -37,9 +37,17 @@ public class SpellCheck {
 
         TST dictionaryTST = new TST();
         for (String word : dictionary) {
-            dictionaryTST.insert(dictionaryTST.getRoot(), word);
+            dictionaryTST.insert(word);
         }
+        TST mispelledTST = new TST();
 
+        for (String word : text) {
+            if (!mispelledTST.lookup(word) && !dictionaryTST.lookup(word)) {
+                mispelledTST.insert(word);
+                mispelled.add(word);
+//                System.out.println(word);
+            }
+        }
 
 
 

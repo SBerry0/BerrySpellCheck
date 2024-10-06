@@ -16,8 +16,8 @@ public class TST {
         return node;
     }
 
-    public void insert(TSTNode node, String word) {
-        root = insert(node, word, 0);
+    public void insert(String word) {
+        root = insert(root, word, 0);
     }
 
     public TSTNode insert(TSTNode node, String word, int d) {
@@ -42,6 +42,30 @@ public class TST {
         return node;
     }
 
+    public boolean lookup(String word) {
+        return lookup(root, word, 0) != null;
+    }
+
+    public TSTNode lookup(TSTNode node, String word, int d) {
+        char c = word.charAt(d);
+        if (node == null) {
+            return null;
+        }
+        if (c < node.getLetter()) {
+            return lookup(node.getLess(), word, d);
+        } else if (c > node.getLetter()) {
+            return lookup(node.getGreater(), word, d);
+        } else {
+            if (d == word.length() -1) {
+                if (node.isEnding()) {
+                    return node;
+                }
+                return null;
+            }
+            // Only move onto the next letter when the initial one has been found in the TST
+            return lookup(node.getEqual(), word, d+1);
+        }
+    }
 
 
 //    public void insert(String word) {
