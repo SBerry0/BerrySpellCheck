@@ -10,8 +10,6 @@ import java.util.ArrayList;
  * */
 
 public class SpellCheck {
-
-
     /**
      * checkWords finds all words in text that are not present in dictionary
      *
@@ -20,13 +18,16 @@ public class SpellCheck {
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
     public String[] checkWords(String[] text, String[] dictionary) {
+        ArrayList<String> mispelled = new ArrayList<>();
+
+        // Trie:
 //        Trie dictionaryTrie = new Trie();
 //        for (String word : dictionary) {
 //            dictionaryTrie.insert(word);
 //        }
 //
 //        Trie mispelledTrie = new Trie();
-        ArrayList<String> mispelled = new ArrayList<>();
+//
 //        for (String word : text) {
 //            if (!mispelledTrie.lookup(word) && !dictionaryTrie.lookup(word)) {
 //                // If the word does not exist in the dictionary add it to mispelled
@@ -35,28 +36,29 @@ public class SpellCheck {
 //            }
 //        }
 
+        // TST:
         TST dictionaryTST = new TST();
-        for (String word : dictionary) {
-            dictionaryTST.insert(word);
+        int mid = dictionary.length / 2 - 1;
+
+        // Moving from the middle outwards to optimize the TST
+        for (int i = 0; i < dictionary.length; i++) {
+            // If i is even, index is middle plus half of i
+            // If i is odd, index is middle plus the length of the dictionary minus half of i+1
+            // All is mod by the length of the dictionary to stay in bounds
+            int index = (mid + ((i%2 == 0) ? i / 2 : dictionary.length-(i+1)/2))%dictionary.length;
+            dictionaryTST.insert(dictionary[index]);
         }
+
         TST mispelledTST = new TST();
 
         for (String word : text) {
             if (!mispelledTST.lookup(word) && !dictionaryTST.lookup(word)) {
                 mispelledTST.insert(word);
                 mispelled.add(word);
-//                System.out.println(word);
             }
         }
 
-
-
-
-
-
-
-
-
+        // ArrayList conversion to array
         String[] out = new String[mispelled.size()];
         for (int i = 0; i < mispelled.size(); i++) {
             out[i] = mispelled.get(i);

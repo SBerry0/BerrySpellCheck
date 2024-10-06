@@ -1,3 +1,4 @@
+// TrieNode.java by Sohum Berry
 public class TrieNode {
     int NUM_CHARACTERS = 256;
     private char letter;
@@ -10,16 +11,17 @@ public class TrieNode {
         this.isWordEnd = isWordEnd;
     }
 
+    // Setters
     public void addChild(TrieNode c) {
         children[c.getLetter()] = c;
     }
-
-    public boolean isWordEnd() {
-        return isWordEnd;
-    }
-
     public void setWordEnd(boolean wordEnd) {
         isWordEnd = wordEnd;
+    }
+
+    // Getters
+    public boolean isWordEnd() {
+        return isWordEnd;
     }
 
     public char getLetter() {

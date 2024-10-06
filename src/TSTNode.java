@@ -1,12 +1,9 @@
+// TSTNode.java by Sohum Berry
 public class TSTNode {
     public final int LESS = 0;
     public final int EQUAL = 1;
     public final int GREATER = 2;
 
-
-//    private TSTNode equal;
-//    private TSTNode greater;
-//    private TSTNode less;
     private char letter;
     private TSTNode[] children;
     private boolean isEnding;
@@ -18,6 +15,7 @@ public class TSTNode {
         this.children = new TSTNode[3];
     }
 
+    // Getters
     public TSTNode getEqual() {
         return children[EQUAL];
     }
@@ -38,58 +36,18 @@ public class TSTNode {
         return isEnding;
     }
 
+    // Setters
     public void setLess(TSTNode n) {
         children[LESS] = n;
     }
+
     public void setEqual(TSTNode n) {
         children[EQUAL] = n;
     }
+
     public void setGreater(TSTNode n) {
         children[GREATER] = n;
     }
-
-
-
-
-    public TSTNode setChild(char compChar, char nextChar) {
-        if (letter == compChar) {
-            return setChildNode(EQUAL, nextChar);
-        }
-        if (letter > compChar) {
-            return setChildNode(LESS, nextChar);
-        }
-        return setChildNode(GREATER, nextChar);
-    }
-
-    public TSTNode setChild(char c) {
-        if (letter == c) {
-            return setChildNode(EQUAL, c);
-        }
-        if (letter > c) {
-            return setChildNode(LESS, c);
-        }
-        return setChildNode(GREATER, c);
-    }
-
-    public TSTNode setChildNode(int index, char c) {
-        if (children[index] == null) {
-            children[index] = new TSTNode(c);
-        }
-        else {
-            children[index].setChild(c);
-        }
-        return children[index];
-    }
-
-
-//    public void setGreater(char c) {
-//        if (this.greater == null) {
-//            this.greater = new TSTNode(c);
-//        } else {
-//            this.greater.se
-//        }
-//        this.greater = greater;
-//    }
 
     public void setLetter(char letter) {
         this.letter = letter;

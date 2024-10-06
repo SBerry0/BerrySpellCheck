@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Stack;
-
+// Trie.java by Sohum Berry
 public class Trie {
     TrieNode root;
 
